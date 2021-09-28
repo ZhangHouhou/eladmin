@@ -42,4 +42,13 @@
     <logger name="jdbc.audit" level="OFF" additivity="false">
         <appender-ref ref="console" />
     </logger>
+
+    <logger name="me.chanjar.weixin" level="OFF" additivity="debug">
+        <appender-ref ref="console" />
+    </logger>
+
+    <logger name="com.github.binarywang.demo.wx.cp" level="debug" additivity="false">
+        <appender-ref ref="console" />
+    </logger>
+
 </configuration>
