@@ -13,7 +13,7 @@
     </appender>
 
     <!--普通日志输出到控制台-->
-    <root level="info">
+    <root level="DEBUG">
         <appender-ref ref="console" />
     </root>
 
@@ -43,11 +43,11 @@
         <appender-ref ref="console" />
     </logger>
 
-    <logger name="me.chanjar.weixin" level="OFF" additivity="debug">
+    <logger name="me.chanjar.weixin" level="DEBUG" additivity="false">
         <appender-ref ref="console" />
     </logger>
 
-    <logger name="com.github.binarywang.demo.wx.cp" level="debug" additivity="false">
+    <logger name="com.github.binarywang.demo.wx.cp" level="DEBUG" additivity="false">
         <appender-ref ref="console" />
     </logger>
 

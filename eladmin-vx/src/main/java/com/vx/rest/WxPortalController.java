@@ -6,6 +6,7 @@ import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
+import me.zhengjie.annotation.AnonymousAccess;
 import me.zhengjie.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ public class WxPortalController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping(produces = "text/plain;charset=utf-8")
+    @AnonymousAccess
     public String authGet(@PathVariable Integer agentId,
                           @RequestParam(name = "msg_signature", required = false) String signature,
                           @RequestParam(name = "timestamp", required = false) String timestamp,

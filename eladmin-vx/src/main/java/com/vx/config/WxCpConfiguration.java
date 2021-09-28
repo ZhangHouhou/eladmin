@@ -3,6 +3,7 @@ package com.vx.config;
 
 import com.google.common.collect.Maps;
 import com.vx.handler.*;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.cp.api.WxCpService;
