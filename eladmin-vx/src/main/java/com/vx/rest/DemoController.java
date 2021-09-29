@@ -5,12 +5,19 @@ import com.vx.config.WxCpConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpService;
-import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;
-import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;
-import me.chanjar.weixin.cp.message.WxCpMessageRouter;
-import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
+import me.chanjar.weixin.cp.bean.WxCpDepart;
+import me.chanjar.weixin.cp.bean.WxCpTpDepart;
+import me.chanjar.weixin.cp.bean.WxCpUser;
+import me.chanjar.weixin.cp.tp.service.WxCpTpDepartmentService;
 import me.zhengjie.annotation.AnonymousAccess;
-import org.springframework.web.bind.annotation.*;
+import me.zhengjie.utils.JsonUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author Binary Wang(https://github.com/binarywang)
@@ -19,13 +26,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/wx/cp/demo")
 @Slf4j
 public class DemoController {
-
-    @GetMapping(produces = "text/plain;charset=utf-8")
-    @AnonymousAccess
-    public String helloVx() {
-
-        return "非法请求";
-    }
 
     @PostMapping(produces = "application/json; charset=UTF-8")
     @AnonymousAccess
@@ -36,23 +36,15 @@ public class DemoController {
         }
 
         try {
-            String accessToken = wxCpService.getAccessToken();
-            System.out.println(accessToken);
+            List<WxCpDepart> departList = wxCpService.getDepartmentService().list(1L);
+            log.info(JsonUtils.toJson(departList));
+            List<WxCpUser> wxCpUserList = wxCpService.getUserService().listByDepartment(492L, false, 0);
+            log.info(JsonUtils.toJson(wxCpUserList));
+
         } catch (WxErrorException e) {
             e.printStackTrace();
         }
         return "out";
     }
-
-    private WxCpXmlOutMessage route(Integer agentId, WxCpXmlMessage message) {
-        try {
-            return WxCpConfiguration.getRouters().get(agentId).route(message);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-        }
-
-        return null;
-    }
-
 
 }

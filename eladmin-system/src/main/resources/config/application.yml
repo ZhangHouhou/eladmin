@@ -62,8 +62,8 @@ wechat:
     appConfigs:
       - agentId: 1000002
         secret: tOcda4xGfe8gGxbz_nGy_GDRlt_3Gl3lLwpJp9DZjx4
-        token:
-        aesKey:
+        token: JsrRB5
+        aesKey: PMEDUX94rMKEHCANxEl5LDl1Gs9lNaYtx6kPhiyCjGS
 #      - agentId: 1000002
 #        secret: 1111
 #        token: 111

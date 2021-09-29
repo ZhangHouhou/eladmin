@@ -30,6 +30,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>me.zhengjie</groupId>
             <artifactId>eladmin-common</artifactId>
