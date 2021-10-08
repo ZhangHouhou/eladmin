@@ -48,6 +48,7 @@ public class WxPortalController {
     }
 
     @PostMapping(produces = "application/xml; charset=UTF-8")
+    @AnonymousAccess
     public String post(@PathVariable Integer agentId,
                        @RequestBody String requestBody,
                        @RequestParam("msg_signature") String signature,

@@ -22,14 +22,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,7 +45,9 @@ import java.util.List;
 @EnableWebMvc
 public class ConfigurerAdapter implements WebMvcConfigurer {
 
-    /** 文件配置 */
+    /**
+     * 文件配置
+     */
     private final FileProperties properties;
 
     public ConfigurerAdapter(FileProperties properties) {
@@ -64,8 +69,8 @@ public class ConfigurerAdapter implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         FileProperties.ElPath path = properties.getPath();
-        String avatarUtl = "file:" + path.getAvatar().replace("\\","/");
-        String pathUtl = "file:" + path.getPath().replace("\\","/");
+        String avatarUtl = "file:" + path.getAvatar().replace("\\", "/");
+        String pathUtl = "file:" + path.getPath().replace("\\", "/");
         registry.addResourceHandler("/avatar/**").addResourceLocations(avatarUtl).setCachePeriod(0);
         registry.addResourceHandler("/file/**").addResourceLocations(pathUtl).setCachePeriod(0);
         registry.addResourceHandler("/**").addResourceLocations("classpath:/META-INF/resources/").setCachePeriod(0);
@@ -74,15 +79,28 @@ public class ConfigurerAdapter implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         // 使用 fastjson 序列化，会导致 @JsonIgnore 失效，可以使用 @JSONField(serialize = false) 替换
-        FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
-        List<MediaType> supportMediaTypeList = new ArrayList<>();
-        supportMediaTypeList.add(MediaType.APPLICATION_JSON_UTF8);
+        FastJsonHttpMessageConverter jsonMsgConverter = new FastJsonHttpMessageConverter();
+        List<MediaType> supportMediaTypeList = Arrays.asList(
+                MediaType.APPLICATION_JSON,
+                MediaType.TEXT_HTML,
+                MediaType.TEXT_XML,
+                MediaType.APPLICATION_OCTET_STREAM);
         FastJsonConfig config = new FastJsonConfig();
         config.setDateFormat("yyyy-MM-dd HH:mm:ss");
         config.setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
-        converter.setFastJsonConfig(config);
-        converter.setSupportedMediaTypes(supportMediaTypeList);
-        converter.setDefaultCharset(StandardCharsets.UTF_8);
-        converters.add(converter);
+        jsonMsgConverter.setFastJsonConfig(config);
+        jsonMsgConverter.setSupportedMediaTypes(supportMediaTypeList);
+        jsonMsgConverter.setDefaultCharset(StandardCharsets.UTF_8);
+        converters.add(jsonMsgConverter);
+        converters.add(stringHttpMessageConverter());
+    }
+
+    @Bean
+    public StringHttpMessageConverter stringHttpMessageConverter() {
+        List<MediaType> supportMediaTypeList = Collections.singletonList(
+                MediaType.TEXT_PLAIN);
+        StringHttpMessageConverter strMsgConverter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
+        strMsgConverter.setSupportedMediaTypes(supportMediaTypeList);
+        return strMsgConverter;
     }
 }
