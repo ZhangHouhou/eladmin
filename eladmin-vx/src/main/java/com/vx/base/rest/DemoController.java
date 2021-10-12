@@ -1,14 +1,12 @@
-package com.vx.rest;
+package com.vx.base.rest;
 
 
-import com.vx.config.WxCpConfiguration;
+import com.vx.base.config.WxCpConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.WxCpDepart;
-import me.chanjar.weixin.cp.bean.WxCpTpDepart;
 import me.chanjar.weixin.cp.bean.WxCpUser;
-import me.chanjar.weixin.cp.tp.service.WxCpTpDepartmentService;
 import me.zhengjie.annotation.AnonymousAccess;
 import me.zhengjie.utils.JsonUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

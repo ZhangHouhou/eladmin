@@ -1,4 +1,4 @@
-package com.vx.builder;
+package com.vx.base.builder;
 
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;

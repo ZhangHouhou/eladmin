@@ -1,7 +1,7 @@
-package com.vx.rest;
+package com.vx.base.rest;
 
 
-import com.vx.config.WxCpConfiguration;
+import com.vx.base.config.WxCpConfiguration;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;

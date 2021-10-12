@@ -1,4 +1,4 @@
-package com.vx.handler;
+package com.vx.base.handler;
 
 /**
  * @author Binary Wang(https://github.com/binarywang)

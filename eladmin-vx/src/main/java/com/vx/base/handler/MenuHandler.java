@@ -1,4 +1,4 @@
-package com.vx.handler;
+package com.vx.base.handler;
 
 import me.chanjar.weixin.common.api.WxConsts.MenuButtonType;
 import me.chanjar.weixin.common.session.WxSessionManager;

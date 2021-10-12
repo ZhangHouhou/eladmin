@@ -1,7 +1,7 @@
-package com.vx.handler;
+package com.vx.base.handler;
 
 
-import com.vx.builder.TextBuilder;
+import com.vx.base.builder.TextBuilder;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.cp.api.WxCpService;

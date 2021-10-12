@@ -1,4 +1,4 @@
-package com.vx.handler;
+package com.vx.base.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;

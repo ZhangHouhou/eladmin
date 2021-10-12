@@ -1,4 +1,4 @@
-package com.vx.config;
+package com.vx.base.config;
 
 
 import lombok.Getter;

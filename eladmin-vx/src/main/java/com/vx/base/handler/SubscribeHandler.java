@@ -1,6 +1,6 @@
-package com.vx.handler;
+package com.vx.base.handler;
 
-import com.vx.builder.TextBuilder;
+import com.vx.base.builder.TextBuilder;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.cp.api.WxCpService;
