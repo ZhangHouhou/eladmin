@@ -37,6 +37,12 @@
             <version>2.6</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>me.zhengjie</groupId>
+            <artifactId>eladmin-logging</artifactId>
+            <version>2.6</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 
