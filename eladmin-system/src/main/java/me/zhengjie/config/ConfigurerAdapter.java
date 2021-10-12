@@ -78,13 +78,15 @@ public class ConfigurerAdapter implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        WebMvcConfigurer.super.configureMessageConverters(converters);
+    }
+
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         // 使用 fastjson 序列化，会导致 @JsonIgnore 失效，可以使用 @JSONField(serialize = false) 替换
         FastJsonHttpMessageConverter jsonMsgConverter = new FastJsonHttpMessageConverter();
-        List<MediaType> supportMediaTypeList = Arrays.asList(
-                MediaType.APPLICATION_JSON,
-                MediaType.TEXT_HTML,
-                MediaType.TEXT_XML,
-                MediaType.APPLICATION_OCTET_STREAM);
+        List<MediaType> supportMediaTypeList = Collections.singletonList(
+                MediaType.APPLICATION_JSON);
         FastJsonConfig config = new FastJsonConfig();
         config.setDateFormat("yyyy-MM-dd HH:mm:ss");
         config.setSerializerFeatures(SerializerFeature.DisableCircularReferenceDetect);
@@ -92,7 +94,7 @@ public class ConfigurerAdapter implements WebMvcConfigurer {
         jsonMsgConverter.setSupportedMediaTypes(supportMediaTypeList);
         jsonMsgConverter.setDefaultCharset(StandardCharsets.UTF_8);
         converters.add(jsonMsgConverter);
-        converters.add(stringHttpMessageConverter());
+//        converters.add(stringHttpMessageConverter());
     }
 
     @Bean

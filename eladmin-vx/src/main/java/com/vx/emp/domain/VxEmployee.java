@@ -1,38 +1,22 @@
-/*
-*  Copyright 2019-2020 Zheng Jie
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*  http://www.apache.org/licenses/LICENSE-2.0
-*
-*  Unless required by applicable law or agreed to in writing, software
-*  distributed under the License is distributed on an "AS IS" BASIS,
-*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*  See the License for the specific language governing permissions and
-*  limitations under the License.
-*/
 package com.vx.emp.domain;
 
-import lombok.Data;
 import cn.hutool.core.bean.BeanUtil;
-import io.swagger.annotations.ApiModelProperty;
 import cn.hutool.core.bean.copier.CopyOptions;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.sql.Timestamp;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.sql.Timestamp;
+
 
 /**
-* @website https://el-admin.vip
-* @description /
-* @author zmh
-* @date 2021-10-12
-**/
+ * @author zmh
+ */
 @Entity
 @Data
-@Table(name="vx_employee")
+@Table(name = "vx_employee")
 public class VxEmployee implements Serializable {
 
     @Id
@@ -41,22 +25,22 @@ public class VxEmployee implements Serializable {
     @ApiModelProperty(value = "vxEmpId")
     private Long vxEmpId;
 
-    @Column(name = "user_id",nullable = false)
+    @Column(name = "user_id", nullable = false)
     @NotBlank
     @ApiModelProperty(value = "企业微信中的唯一ID，不区分大小写长度为1~64个字节(由数字、字母和“_-@.”组成，首字符必须是数字或字母)")
     private String userId;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     @NotBlank
     @ApiModelProperty(value = "name")
     private String name;
 
-    @Column(name = "mobile",nullable = false)
+    @Column(name = "mobile", nullable = false)
     @NotBlank
     @ApiModelProperty(value = "手机号-唯一 不为空")
     private String mobile;
 
-    @Column(name = "znbz_uid",nullable = false)
+    @Column(name = "znbz_uid", nullable = false)
     @NotBlank
     @ApiModelProperty(value = "智能包装系统中的工号 唯一")
     private String znbzUid;
@@ -121,7 +105,7 @@ public class VxEmployee implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private Timestamp updateTime;
 
-    public void copy(VxEmployee source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
+    public void copy(VxEmployee source) {
+        BeanUtil.copyProperties(source, this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }
