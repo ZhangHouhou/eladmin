@@ -73,9 +73,9 @@ public class VxEmployee implements Serializable {
     @ApiModelProperty(value = "主部门（唯一） 所有部门单独存")
     private String mainDepartment;
 
-    @Column(name = "avatar_mediaId")
+    @Column(name = "avatar_media_id")
     @ApiModelProperty(value = "成员头像的media id，通过素材管理接口上传图片获得的media id")
-    private String avatarMediaid;
+    private String avatarMediaId;
 
     @Column(name = "to_invite")
     @ApiModelProperty(value = "是否邀请该成员使用企业微信（将通过微信服务通知或短信或邮件下发邀请，每天自动下发一次，最多持续3个工作日），默认值为true。")
