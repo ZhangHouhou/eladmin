@@ -79,7 +79,7 @@ public class VxEmployee implements Serializable {
 
     @Column(name = "to_invite")
     @ApiModelProperty(value = "是否邀请该成员使用企业微信（将通过微信服务通知或短信或邮件下发邀请，每天自动下发一次，最多持续3个工作日），默认值为true。")
-    private Integer toInvite;
+    private Boolean toInvite;
 
     @Column(name = "external_position")
     @ApiModelProperty(value = "对外职位")

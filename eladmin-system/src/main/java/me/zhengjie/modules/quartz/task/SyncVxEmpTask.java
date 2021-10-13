@@ -1,10 +1,13 @@
 package me.zhengjie.modules.quartz.task;
 
 import com.vx.base.config.WxCpConfiguration;
+import com.vx.emp.domain.VxEmployee;
+import com.vx.emp.service.VxEmployeeService;
+import com.vx.emp.service.mapstruct.WxCpUserConvertMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpService;
-import me.chanjar.weixin.cp.bean.WxCpDepart;
 import me.chanjar.weixin.cp.bean.WxCpUser;
 import me.zhengjie.utils.JsonUtils;
 import org.springframework.stereotype.Component;
@@ -19,7 +22,10 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class SyncVxEmpTask {
+
+    private final VxEmployeeService vxEmpService;
 
     public void task() {
         log.info("run SyncVxEmpTask");
@@ -29,10 +35,13 @@ public class SyncVxEmpTask {
         }
 
         try {
-            List<WxCpDepart> departList = wxCpService.getDepartmentService().list(1L);
-            log.info(JsonUtils.toJson(departList));
+//            List<WxCpDepart> departList = wxCpService.getDepartmentService().list(1L);
+//            log.info("sync department success");
             List<WxCpUser> wxCpUserList = wxCpService.getUserService().listByDepartment(492L, false, 0);
             log.info(JsonUtils.toJson(wxCpUserList));
+
+            List<VxEmployee> employeeList = WxCpUserConvertMapper.MAPPER.toList(wxCpUserList);
+            vxEmpService.saveAll(employeeList);
         } catch (WxErrorException e) {
             e.printStackTrace();
         }

@@ -15,6 +15,7 @@
  */
 package me.zhengjie.modules.system.rest;
 
+import com.vx.emp.service.VxEmployeeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,7 @@ import java.util.Set;
 public class JobController {
 
     private final JobService jobService;
+    private final VxEmployeeService vxEmployeeService;
     private static final String ENTITY_NAME = "job";
 
     @ApiOperation("导出岗位数据")
