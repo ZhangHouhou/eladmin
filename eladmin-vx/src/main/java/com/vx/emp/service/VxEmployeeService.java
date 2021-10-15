@@ -97,4 +97,12 @@ public interface VxEmployeeService {
      */
     @Transactional(rollbackFor = Exception.class)
     void saveAll(List<VxEmployee> resources);
+
+    /**
+     * 通过智能包装工号 查询企业微信员工信息
+     *
+     * @param znbzUid 智能包装工号
+     * @return 企业微信员工对象
+     */
+    VxEmployeeDto findByZnbzUid(String znbzUid);
 }

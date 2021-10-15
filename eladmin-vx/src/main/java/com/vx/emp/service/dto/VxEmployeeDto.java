@@ -57,7 +57,7 @@ public class VxEmployeeDto implements Serializable {
     private String position;
 
     /**
-     * 1-表示男性，2-表示女性
+     * 性别
      */
     private String gender;
 

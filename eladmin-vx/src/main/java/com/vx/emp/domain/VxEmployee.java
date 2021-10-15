@@ -54,7 +54,7 @@ public class VxEmployee implements Serializable {
     private String position;
 
     @Column(name = "gender")
-    @ApiModelProperty(value = "1-表示男性，2-表示女性")
+    @ApiModelProperty(value = "性别")
     private String gender;
 
     @Column(name = "email")

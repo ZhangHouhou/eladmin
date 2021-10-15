@@ -126,4 +126,11 @@ public class VxEmployeeServiceImpl implements VxEmployeeService {
     public void saveAll(List<VxEmployee> resources) {
         vxEmployeeRepository.saveAll(resources);
     }
+
+    @Override
+    public VxEmployeeDto findByZnbzUid(String znbzUid) {
+        return vxEmployeeMapper.toDto(vxEmployeeRepository.findByZnbzUid(znbzUid));
+    }
+
+
 }

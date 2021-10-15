@@ -23,7 +23,7 @@ public interface WxCpUserConvertMapper {
      * @param source 源对象
      * @return 转换后的存储对象
      */
-    @Mapping(source = "source.userId", target = "vxEmpId")
+    @Mapping(source = "source.userId", target = "userId")
     VxEmployee toDto(WxCpUser source);
 
     /**
