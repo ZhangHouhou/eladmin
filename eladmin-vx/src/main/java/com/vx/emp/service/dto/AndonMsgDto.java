@@ -22,4 +22,5 @@ public class AndonMsgDto implements Serializable {
      * 安灯 处理人
      */
     private String chargeEmp;
+    private String workCellName;
 }

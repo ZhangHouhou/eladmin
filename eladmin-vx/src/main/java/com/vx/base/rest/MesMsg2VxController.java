@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 /**
  * MES 企业微信提醒接口
@@ -49,13 +54,23 @@ public class MesMsg2VxController {
             throw new IllegalArgumentException("安灯信息有误-无法找到安灯责任人!");
         }
 
-        VxEmployeeDto vxEmployeeDto = empService.findByZnbzUid(chargeEmp);
-        if (vxEmployeeDto != null && StringUtils.isNotBlank(vxEmployeeDto.getUserId())) {
+        String[] toUserArr = StringUtils.split(chargeEmp, '/');
+        Set<String> toUserSet = new HashSet<>(toUserArr.length);
+        for (String user : toUserArr) {
+            VxEmployeeDto byZnbzUid = null;
+            if ((byZnbzUid = empService.findByZnbzUid(user)) != null) {
+                toUserSet.add(byZnbzUid.getUserId());
+            }
+        }
+
+        String toUsersStr = StringUtils.join(toUserSet, '|');
+
+        if (StringUtils.isNotBlank(toUsersStr)) {
             WxCpMessageServiceImpl wxCpMessageService = new WxCpMessageServiceImpl(wxCpService);
             WxCpMessage wxCpMessage = WxCpMessage
                     .TEXT()
                     .agentId(1000002)
-                    .toUser(vxEmployeeDto.getUserId())
+                    .toUser(toUsersStr)
                     .content(getMsg(requestBody))
                     .build();
             try {
@@ -69,9 +84,10 @@ public class MesMsg2VxController {
     }
 
     private String getMsg(AndonMsgDto requestBody) {
-        return String.format("MES系统安灯异常待处理：批次编码-[%s]_[%s] 类型-[%s] 触发人[%s]- 状态-[%s] 备注-[%s]",
+        return String.format("MES系统安灯异常待处理：批次编码-[%s]_[%s] 工作单元-[%s] 类型-[%s] 触发人[%s]- 状态-[%s] 备注-[%s]",
                 requestBody.getBatchNum(),
                 requestBody.getAndonNum(),
+                requestBody.getWorkCellName(),
                 requestBody.getAndonType(),
                 requestBody.getFounder(),
                 requestBody.getAndonStatus(),
