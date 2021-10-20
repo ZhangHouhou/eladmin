@@ -16,6 +16,7 @@
         <module>eladmin-tools</module>
         <module>eladmin-generator</module>
         <module>eladmin-vx</module>
+        <module>eladmin-modbus</module>
     </modules>
 
     <name>EL-ADMIN</name>

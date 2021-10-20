@@ -7,6 +7,8 @@ spring:
       url: jdbc:log4jdbc:mysql://${DB_HOST:14.29.237.68}:${DB_PORT:3306}/${DB_NAME:eladmin}?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
       username: ${DB_USER:root}
       password: ${DB_PWD:kIyuS0cxcnJDJqDo}
+      # 兼容 utf8mb4 编码格式
+      connection-init-sqls: set names utf8mb4
       # 初始连接数
       initial-size: 5
       # 最小连接数

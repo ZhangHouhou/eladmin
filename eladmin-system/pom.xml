@@ -52,6 +52,12 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>me.zhengjie</groupId>
+            <artifactId>eladmin-modbus</artifactId>
+            <version>2.6</version>
+        </dependency>
+
         <!-- Spring boot websocket -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
